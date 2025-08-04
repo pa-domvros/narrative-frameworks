@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frameworks for Creative Storytelling</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --header-color: #343a40;
+            --accent-color: #d63384; /* A more creative, magenta-like accent */
+            --accent-text: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 6px 15px rgba(0,0,0,0.07);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2em;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3em;
+        }
+
+        header h1 {
+            color: var(--header-color);
+            font-size: 2.8em;
+            margin: 0;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2em;
+        }
+
+        .framework-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2em;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .framework-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .framework-card h2 {
+            font-size: 1.8em;
+            color: var(--header-color);
+            margin-top: 0;
+            margin-bottom: 0.25em;
+        }
+
+        .framework-card .subtitle {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 1.5em;
+        }
+        
+        .arrow-down {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+
+        .arrow-down span {
+            background-color: var(--accent-color);
+            color: var(--accent-text);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Specific Framework Styles */
+        .journey-act, .act-card, .storybrand-step, .pixar-step {
+            background-color: #f8f9fa;
+        }
+        .journey-act h3 { margin-top: 0; color: var(--header-color); }
+        .journey-act ol { padding-left: 20px; text-align: left; }
+        .heros-journey-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; text-align: center; }
+
+        .storybrand-step { padding: 1em; border-left: 4px solid var(--accent-color); border-radius: 4px; }
+        .storybrand-step strong { color: var(--header-color); }
+
+        .pixar-flow { list-style: none; padding: 0; counter-reset: pixar-counter; }
+        .pixar-step { padding: 0.75em 1em 0.75em 45px; margin-bottom: 0.5em; border-radius: 8px; position: relative; }
+        .pixar-step::before {
+            counter-increment: pixar-counter; content: counter(pixar-counter);
+            background: var(--accent-color); color: var(--accent-text); width: 30px; height: 30px;
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            font-weight: bold; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+        }
+
+        .freytag-pyramid { position: relative; width: 100%; padding-top: 60%; margin: 1em 0; }
+        .pyramid-shape {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom right, #e9ecef, #ced4da);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+        .pyramid-label { position: absolute; background: rgba(255,255,255,0.8); padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+        .l-expo { top: 90%; left: 10%; } .l-rising { top: 50%; left: 20%; transform: rotate(-30deg); } .l-climax { top: 5%; left: 50%; transform: translateX(-50%); } .l-falling { top: 50%; right: 20%; transform: rotate(30deg); } .l-res { top: 90%; right: 10%; }
+        
+        .three-act-container { display: flex; justify-content: space-between; align-items: stretch; gap: 1em; }
+        .act-card { flex: 1; padding: 1em; border-radius: 8px; border-top: 5px solid var(--accent-color); text-align: center; }
+        .act-card h3 { margin: 0 0 0.5em 0; } .act-card strong { color: var(--accent-color); display: block; margin-top: 1em; }
+        
+        .story-circle { position: relative; width: 250px; height: 250px; margin: 2em auto; border: 3px dashed var(--accent-color); border-radius: 50%; }
+        .circle-step { position: absolute; width: 100px; text-align: center; font-size: 0.9em; transform: translate(-50%, -50%); }
+        .cs1 { top: 0%; left: 50%; } .cs2 { top: 15%; left: 85%; } .cs3 { top: 50%; left: 100%; } .cs4 { top: 85%; left: 85%; } .cs5 { top: 100%; left: 50%; } .cs6 { top: 85%; left: 15%; } .cs7 { top: 50%; left: 0%; } .cs8 { top: 15%; left: 15%; }
+
+        .save-the-cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em 1em; }
+        .save-the-cat-grid ol { margin: 0; padding-left: 20px; }
+
+        footer { text-align: center; margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--border-color); color: #6c757d; }
+        
+        @media (max-width: 768px) {
+            .heros-journey-container, .three-act-container, .save-the-cat-grid {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic-container">
+        <header>
+            <h1>A Creator's Guide to Story Structure</h1>
+        </header>
+
+        <main class="framework-grid">
+
+            <div class="framework-card full-width">
+                <h2>🌄 The Hero's Journey</h2>
+                <p class="subtitle">The timeless structure for epic tales of adventure and personal transformation.</p>
+                <div class="heros-journey-container">
+                    <div class="journey-act"><h3>Act I: Departure</h3><ol><li>The Ordinary World</li><li>The Call to Adventure</li><li>Refusal of the Call</li><li>Meeting the Mentor</li><li>Crossing the Threshold</li></ol></div>
+                    <div class="journey-act"><h3>Act II: Initiation</h3><ol start="6"><li>Tests, Allies, Enemies</li><li>Approach to the Inmost Cave</li><li>The Ordeal</li><li>Reward (Seizing the Sword)</li></ol></div>
+                    <div class="journey-act"><h3>Act III: Return</h3><ol start="10"><li>The Road Back</li><li>The Resurrection</li><li>Return with the Elixir</li></ol></div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <h2>🤝 The Mentor's Gift</h2>
+                <p class="subtitle">A structure focusing on a protagonist who succeeds with a guide's help.</p>
+                <div class="storybrand-flow">
+                    <div class="storybrand-step"><strong>1. A Protagonist...</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>2. ...Faces a Problem.</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>3. ...And Meets a Mentor.</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>4. ...Who Offers a Plan.</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>5. ...And Challenges Them to Act.</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>6. Leading to Triumph...</strong></div>
+                    <div class="arrow-down"><span>↓</span></div>
+                    <div class="storybrand-step"><strong>7. ...and the Aversion of Tragedy.</strong></div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <h2>⛰️ Freytag's Pyramid</h2>
+                <p class="subtitle">The classic dramatic structure for building and releasing tension in a plot.</p>
+                <div class="freytag-pyramid">
+                    <div class="pyramid-shape"></div>
+                    <div class="pyramid-label l-climax">3. Climax</div>
+                    <div class="pyramid-label l-rising">2. Rising Action</div>
+                    <div class="pyramid-label l-falling">4. Falling Action</div>
+                    <div class="pyramid-label l-expo">1. Exposition</div>
+                    <div class="pyramid-label l-res">5. Resolution</div>
+                </div>
+            </div>
+            
+            <div class="framework-card full-width">
+                <h2>🎬 The Three-Act Structure</h2>
+                <p class="subtitle">The foundational blueprint for nearly every screenplay, novel, and play.</p>
+                <div class="three-act-container">
+                    <div class="act-card"><h3>Act I: The Setup</h3><p>Introduce the protagonist and their world. An Inciting Incident shatters their status quo.</p><strong>Plot Point 1</strong></div>
+                    <div class="act-card"><h3>Act II: Confrontation</h3><p>The protagonist pursues their goal, facing rising stakes and obstacles, leading to a Midpoint shift.</p><strong>Plot Point 2</strong></div>
+                    <div class="act-card"><h3>Act III: Resolution</h3><p>The journey culminates in a final Climax, followed by the story's resolution and a glimpse of the new normal.</p><strong>The End</strong></div>
+                </div>
+            </div>
+            
+            <div class="framework-card">
+                <h2>🔄 Dan Harmon's Story Circle</h2>
+                <p class="subtitle">An 8-step framework focusing on a character's journey out of and back to their comfort zone.</p>
+                <div class="story-circle">
+                    <div class="circle-step cs1">1. You (Comfort)</div>
+                    <div class="circle-step cs2">2. Need</div>
+                    <div class="circle-step cs3">3. Go</div>
+                    <div class="circle-step cs4">4. Search</div>
+                    <div class="circle-step cs5">5. Find</div>
+                    <div class="circle-step cs6">6. Take (Price)</div>
+                    <div class="circle-step cs7">7. Return</div>
+                    <div class="circle-step cs8">8. Change</div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <h2> domino The Pixar Formula</h2>
+                <p class="subtitle">A simple but powerful formula for plotting an emotionally resonant story.</p>
+                <ol class="pixar-flow">
+                    <li class="pixar-step"><strong>Once upon a time...</strong></li>
+                    <li class="pixar-step"><strong>Every day...</strong></li>
+                    <li class="pixar-step"><strong>Until one day...</strong></li>
+                    <li class="pixar-step"><strong>Because of that...</strong></li>
+                    <li class="pixar-step"><strong>Because of that...</strong></li>
+                    <li class="pixar-step"><strong>Until finally...</strong></li>
+                </ol>
+            </div>
+            
+            <div class="framework-card full-width">
+                <h2>🐈 Save the Cat! Beat Sheet</h2>
+                <p class="subtitle">A 15-beat blueprint for plotting a novel or screenplay from start to finish.</p>
+                <div class="save-the-cat-grid">
+                    <div><h3>Act I (The Thesis)</h3><ol><li>Opening Image</li><li>Theme Stated</li><li>Set-up</li><li>Catalyst</li><li>Debate</li></ol></div>
+                    <div><h3>Act II (The Antithesis)</h3><ol start="6"><li>Break into Two</li><li>B Story</li><li>Fun and Games</li><li>Midpoint</li><li>Bad Guys Close In</li><li>All Is Lost</li><li>Dark Night of the Soul</li></ol></div>
+                    <div><h3>Act III (The Synthesis)</h3><ol start="13"><li>Break into Three</li><li>Finale</li><li>Final Image</li></ol></div>
+                </div>
+            </div>
+            
+             <div class="framework-card full-width">
+                <h2>💧 Scene Structure (P-A-S)</h2>
+                <p class="subtitle">A micro-framework for building tension and action within a single scene.</p>
+                <div class="three-act-container">
+                    <div class="act-card"><h3>1. Problem</h3><p>What is the character's immediate goal or obstacle in this scene? (e.g., "The door is locked.")</p></div>
+                    <div class="act-card"><h3>2. Agitate</h3><p>What raises the stakes and makes the problem worse? (e.g., "Footsteps are approaching from behind.")</p></div>
+                    <div class="act-card"><h3>3. Solve</h3><p>How does the character resolve the immediate problem, leading to the next scene? (e.g., "She breaks the lock with a crowbar.")</p></div>
+                </div>
+            </div>
+
+        </main>
+        
+        <footer>
+            <p>Generated on August 4, 2025 in Thessaloniki, Greece.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
